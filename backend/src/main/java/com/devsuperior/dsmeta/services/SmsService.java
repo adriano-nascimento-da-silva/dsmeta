@@ -35,7 +35,7 @@ public class SmsService {
 		String date = sale.getDate().getMonthValue() + "/" + sale.getDate().getYear(); //mostra data da venda na mensagem SMS
 		
 		String msg = "Vendedor " + sale.getSellerName() + " foi destaque em " + date
-		+ " com um total de R$ " + String.format("%.2f", sale.getAmount()); // LINHA 37, 38 - mensagem da venda dentro da função que vai por SMS
+		+ " com um total de R$ " + String.format("%.2f", sale.getAmount()).replace(".", ","); // LINHA 37, 38 - mensagem da venda dentro da função que vai por SMS
 
 		Twilio.init(twilioSid, twilioKey);
 
