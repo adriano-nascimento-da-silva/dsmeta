@@ -1,4 +1,5 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import NotificationButton from "../NotificationButton";
@@ -9,9 +10,17 @@ function Salescard() {
     const min = new Date(new Date().setDate(new Date().getDate() - 365));
     const max = new Date();
 
-
     const [minDate, setMinDate] = useState(min);
     const [maxDate, setMaxDate] = useState(max);
+
+    useEffect(() => {
+
+        axios.get("http://localhost:8080/sales")
+            .then(response => {                     
+                console.log(response.data)
+            })
+
+    }, []);
 
     return (
         <div className="dsmeta-card">
@@ -98,3 +107,28 @@ function Salescard() {
 }
 
 export default Salescard;
+
+
+
+
+
+
+
+
+
+/*
+ANOTAÇÕES
+=========
+
+LINHA 19 = a requisição axios.get acima retorna obj especial do JavaScript
+           que se chama Promisse. E este objeto executa operação e pode falhar ou dar certo. 
+           Para esta função dar certo: CHAMA uma função (.then). Esta função chama O objeto da resposta
+           que deu certo (response), e podemos tratá-lo dentro da função como acima.
+           Sendo assim: Aqui neste caso, o frontend faz uma requisição ao backend, que é prontamente atendida
+           através do console.log
+
+
+
+
+
+*/ 
