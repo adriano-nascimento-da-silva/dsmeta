@@ -19,12 +19,14 @@ function Salescard() {
 
     useEffect(() => {
 
-        axios.get(`${BASE_URL}/sales`)
+        const dmin = minDate.toISOString().slice(0, 10);
+        const dmax = maxDate.toISOString().slice(0, 10);
+        console.log(dmin);
+        axios.get(`${BASE_URL}/sales?minDate=${dmin}&maxDate=${dmax}`) //endereço da requisição do Postman
             .then(response => {
                 setSales(response.data.content);
             });
-
-    }, []);
+    }, [minDate, maxDate]);
 
     return (
         <div className="dsmeta-card">
@@ -110,6 +112,12 @@ LINHA 19 = a requisição axios.get acima retorna obj especial do JavaScript
            que deu certo (response), e podemos tratá-lo dentro da função como acima.
            Sendo assim: Aqui neste caso, o frontend faz uma requisição ao backend, que é prontamente atendida
            através do console.log
+LINHA 22 = toISOString().slice(0, 10) -> especifica a formatação da data, e corta(slice) de-até onde vão as 
+           formatos das datas aqui, por exemplo: 2021-07-13(dez caracteres)
+
+LINHA 29 = [minDate, maxDate] - configurando useffect para processar requisição sempre que 
+                                as datas mínima e máxima mudarem
+
 
 LINHA 66 = (.map) - percorre a lista, e faz uma operação com cada elemento da lista.
 LINHA 68 = (.key nomecriado.id) - O react exige que: Quando se faz uma renderização de conteúdo, baseado
