@@ -1,3 +1,5 @@
+import { ToastContainer } from 'react-toastify'; //Biblioteca simples para criação de mensagens customizadas que poderão ser criadas em todo site
+import 'react-toastify/dist/ReactToastify.css';
 import Header from "./components/Header";
 import SalesCard from "./components/SalesCard";
 
@@ -5,6 +7,7 @@ import SalesCard from "./components/SalesCard";
 function App() {
   return (
     <>
+      <ToastContainer />
       <Header />
       <main>
         <section id="sales">
